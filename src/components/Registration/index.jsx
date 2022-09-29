@@ -10,11 +10,6 @@ const [user,setUser] = useState({
 })
 
 
-//const handleChange = (event) => {
-//    setUser({username: event.target.value, email: event.target.value, 
-//        password:event.target.value, passwordConfirm: event.target.value  })
-//}  
-
 
 const handleClick = (event) => {
         
@@ -24,18 +19,19 @@ const handleClick = (event) => {
 }
 
 
-//function isValidEmail(email) {
-//    return /\S+@\S+\.\S+/.test(email);
-//}
+//  const extractUsername = () => {       
+//    if(!user.username) {
+//        let cutUsername = user.email.split("@")[0];
+//        setUser({...user, username: cutUsername})
+//    } 
+// }
 
-// if (user.username === '' && !isValidEmail)
-
-  const extractUsername = () => {       
-    if(!user.username) {
-        let cutUsername = user.email.split("@")[0];
-        setUser({...user, username: cutUsername})
-    } 
+ const handleBlur =(event) => {
+    let cutUsername = user.email.split("@")[0];
+    setUser({...user, username: cutUsername})
+    console.log(cutUsername)
  }
+
 
 
     return(
@@ -54,7 +50,8 @@ const handleClick = (event) => {
             placeholder ='Email' 
             id="Email"
             required
-            onChange={(e) => setUser({...user, email: e.target.value})} /> 
+            onChange={(e) => setUser({...user, email: e.target.value})} 
+            onBlur ={handleBlur} /> 
         <br />
 
         <input 
@@ -74,10 +71,12 @@ const handleClick = (event) => {
         />
 
         <br />
-        <button onClick = {handleClick} onMouseOver={extractUsername}> Register </button>
+        <button onClick = {handleClick} > Register </button>
         </form> 
         </>
     )
 }
 
 export default Registration;
+
+//onMouseOver={extractUsername}
