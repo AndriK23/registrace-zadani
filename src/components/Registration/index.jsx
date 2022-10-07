@@ -11,37 +11,34 @@ const [user,setUser] = useState({
 
 
 
-const handleClick = (event) => {
-        
+
+const handleSubmit = (event) => {   
         event.preventDefault() 
-        console.log({user}) 
-      
+        console.log(user)
 }
 
 
-//  const extractUsername = () => {       
-//    if(!user.username) {
-//        let cutUsername = user.email.split("@")[0];
-//        setUser({...user, username: cutUsername})
-//    } 
-// }
-
  const handleBlur =(event) => {
+    if (user.username === '' && user.email.includes('@')) {
     let cutUsername = user.email.split("@")[0];
     setUser({...user, username: cutUsername})
     console.log(cutUsername)
  }
+}
 
+ 
 
+// 
 
     return(
         <>
-        <form>
+        <form onSubmit ={handleSubmit}>
         <input 
             type = 'text' 
             placeholder ='Username' 
             id = 'Username'
             onChange={(e) => setUser({...user, username: e.target.value})}    
+            value={user.username}
         /> 
         <br />
 
@@ -51,7 +48,9 @@ const handleClick = (event) => {
             id="Email"
             required
             onChange={(e) => setUser({...user, email: e.target.value})} 
-            onBlur ={handleBlur} /> 
+            onBlur ={handleBlur} 
+            value={user.email}
+        /> 
         <br />
 
         <input 
@@ -59,6 +58,7 @@ const handleClick = (event) => {
             placeholder ='Password' 
             id='Password'
             onChange={(e) => setUser({...user, password: e.target.value})}
+            value={user.password}
         /> 
         <br />
         
@@ -68,10 +68,11 @@ const handleClick = (event) => {
             id='Password Confirm'
             required
             onChange={(e) => setUser({...user, passwordConfirm: e.target.value}) }
+            value={user.passwordConfirm}
         />
 
         <br />
-        <button onClick = {handleClick} > Register </button>
+        <button type='submit'> Register </button>
         </form> 
         </>
     )
